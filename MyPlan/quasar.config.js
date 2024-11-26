@@ -14,6 +14,7 @@ const path = require('path');
 
 module.exports = configure(function (/* ctx */) {
   return {
+    // quasar.config file
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
     // preFetch: true,
 
@@ -32,6 +33,7 @@ module.exports = configure(function (/* ctx */) {
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
+
       // 'ionicons-v4',
       // 'mdi-v7',
       // 'fontawesome-v6',
@@ -98,7 +100,21 @@ module.exports = configure(function (/* ctx */) {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
+      config: {
+        brand: {
+          primary: '#b519d1',
+          secondary: '#cf4a9e',
+          accent: '#9C27B0',
+
+          dark: '#1d1d1d',
+          'dark-page': '#121212',
+
+          positive: '#51b2db',
+          negative: '#ab3240',
+          info: '#a17d9e',
+          warning: '#c99e00'
+        }
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack

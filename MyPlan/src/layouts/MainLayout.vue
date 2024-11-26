@@ -12,6 +12,10 @@
         />
 
         <q-toolbar-title text-h1>
+          <q-avatar size="100px">
+            <img src="/icons/logo1.png">
+          </q-avatar>
+
           MyPlan
         </q-toolbar-title>
 
