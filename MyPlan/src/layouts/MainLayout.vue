@@ -11,8 +11,8 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title text-h1>
+          MyPlan
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
@@ -48,6 +48,7 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import userPage from 'src/pages/userPage.vue';
 
 defineOptions({
   name: 'MainLayout'
@@ -55,46 +56,33 @@ defineOptions({
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'UserPage',
+    caption: 'test user page',
+    link: '#/userPage'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: 'Početna stranica',
+    caption: 'Početna stranica MyPlan-a',
+    icon: 'home',
+    link: '#/'
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: 'O nama',
+    caption: 'Korisne informacije o MyPlan-u.',
+    icon: 'info',
+    link: '#/onama'
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    title: 'Login',
+    caption: 'Login za postojeće korisnike',
+    icon: 'login',
+    link: '#/login'
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    title: 'Registracija',
+    caption: 'Registracija za nove korisnike',
+    icon: 'manage_accounts',
+    link: '#/register'
   }
 ]
 
@@ -103,4 +91,5 @@ const leftDrawerOpen = ref(false)
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
 </script>
