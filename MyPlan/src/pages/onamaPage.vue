@@ -70,7 +70,7 @@
             {{ korisnik }}
             <div>-Trčanje</div>
             <div>-Učenje</div>
-            <div class="text-bold">Ove zadatke prilagođavate svojim interesima i potrebama.</div>
+            <div>Ove zadatke prilagođavate svojim interesima i potrebama.</div>
           </div>
         </q-carousel-slide>
       </q-carousel>
