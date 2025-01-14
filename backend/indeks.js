@@ -34,11 +34,6 @@ app.get("/api/user", (request, response) => { // dohvaćanje svih user-a
         if (error) throw error;
         response.send(results);
     });
-    /*
-    req - request - slanje zahtjeva s klijentske strane
-    res - response - slanje odgovora sa server strane
-
-    */
 });
 
 app.get("/api/user/:id", (request, response) => { //dovhaćanje podataka o useru pod određenim id-om
@@ -49,16 +44,6 @@ app.get("/api/user/:id", (request, response) => { //dovhaćanje podataka o useru
     });
 });
 
-/*app.post("/api/rezerv_knjige", (request, response) => {
-    const data = request.body;
-    rezervacija = [[data.datum, data.id_knjiga, data.id_korisnik]]
-    connection.query("INSERT INTO rezervacija (datum_rez, knjiga, korisnik) VALUES ?", [rezervacija], (error, results) => {
-        if (error) throw error;
-        response.send(results);
-    });
-    //response.send("Poslano" + data.id_knjiga);
-});
-*/
 
 app.post("/api/unos_user", (request, response) => {
     const data = request.body;
@@ -67,13 +52,13 @@ app.post("/api/unos_user", (request, response) => {
         if (error) throw error;
         response.send(results);
     });
-    //response.send("Poslano" + data.id_knjiga);
 });
 
 app.post("/api/login", (request, response) => {
     const data = request.body;
     email=data.email;
     password=data.password;
+
 
     connection.query("SELECT * FROM MYPLAN_user WHERE user_email = ? AND user_password = ?", [email, password], (error, results) => {
       if (error) throw error;

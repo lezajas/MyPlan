@@ -22,7 +22,7 @@
       />
 
       <div>
-        <q-btn label="Unesi" type="Unos" color="primary" @click="insertBooks"/>
+        <q-btn label="Unesi" type="Unos" color="primary" @click="login"/>
       </div>
     </q-form>
 
@@ -42,24 +42,24 @@ export default {
         const email = ref(null)
         const lozinka = ref(null)
 
-        const insertBooks = async () => {
-        const formData ={
-        autor: email.value,
-        opis: lozinka.value,
-      }
-        await axios.post('http://localhost:3000/api/unos_knjiga/', formData)
+        const login = async () => {
+        const loginData = {
+        email: email.value,
+        password: lozinka.value,
+        }
+        await axios.post('http://localhost:3000/api/login/', loginData)
         .then(result => {
           console.log(result.data);
         })
         .catch(error => {
-          console.error("Error loading books:", error);
+          console.error("Error pokušavajući se loginati:", error);
         });
     }
 
     return {
       email,
       lozinka,
-      insertBooks,
+      login,
 
 
     }
