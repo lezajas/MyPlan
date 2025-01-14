@@ -23,7 +23,7 @@
       />
 
       <q-input filled
-        type="lozinka"
+        type="password"
         v-model="lozinka"
         label="Lozinka *"
         hint="Upišite vašu lozinku"

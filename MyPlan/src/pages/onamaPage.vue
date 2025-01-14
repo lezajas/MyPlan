@@ -7,7 +7,7 @@
             <img src="/icons/logo1.png">
           </q-avatar>
 
-          <q-toolbar-title class="text-center text-h4" container style="height: 50px">Što je to MyPlan?</q-toolbar-title>
+          <q-toolbar-title class="text-center text-3" container style="height: 30px">Što je to MyPlan?</q-toolbar-title>
 
 
         </q-toolbar>
@@ -42,6 +42,9 @@
         height="500px"
         class="bg-primary text-white shadow-1 rounded-borders"
       >
+
+
+
         <q-carousel-slide name="pregled_planova" class="column no-wrap flex-center text-h5">
           <q-icon name="info" size="56px" />
           <div class="q-mt-md text-center">
@@ -87,7 +90,7 @@ import { ref } from 'vue'
 export default {
   setup () {
     return {
-      slide: ref('style'),
+      slide: ref('pregled_planova'),
       info: "Pratite svoje dnevne aktivnosti i dugoročne ciljeve kroz pregledan i vizualno privlačan app.",
       osobni_zadaci: "Kreirajte vlastite zadatke, postavite datume i vrijeme izvršenja, te budite sigurni da nećete zaboraviti što je važno.",
       svak:"Primajte podsjetnike za zadatke koje ste sami definirali i ostanite organizirani u svakodnevnim obavezama.",

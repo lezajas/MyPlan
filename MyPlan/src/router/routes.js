@@ -1,4 +1,5 @@
 import UserLayout from 'layouts/UserLayout.vue'
+import AdminLayout from 'src/layouts/AdminLayout.vue'
 
 const routes = [
   {
@@ -18,6 +19,15 @@ const routes = [
     children: [
       {path: '/userPage', component: () => import('pages/userPage.vue')},
     ],
+},
+
+{
+  path: '/AdminLayout',
+  component: AdminLayout,
+  children: [
+    {path: '/adminPage', component: () => import('pages/adminPage.vue')},
+    {path: '/allUsers', component: () => import('pages/allUsers.vue')},
+  ],
 },
 
   // Always leave this as last one,

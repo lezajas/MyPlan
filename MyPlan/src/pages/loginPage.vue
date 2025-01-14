@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md" style="max-width: 400px">
+  <div class="q-pa-lg" style="max-width:500px">
 
     <q-form
       class="q-gutter-md"
@@ -8,13 +8,13 @@
       <q-input filled
         type="email"
         v-model="email"
-        label="Vaš email *"
+        label="Vaš email za prijavu *"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Unos je potreban!']"
       />
 
       <q-input filled
-        type="lozinka"
+        type="password"
         v-model="lozinka"
         label="Upišite si lozinku *"
         lazy-rules

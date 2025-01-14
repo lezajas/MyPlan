@@ -16,16 +16,10 @@
             <img src="/icons/logo1.png">
           </q-avatar>
 
-          MyPlan - {{ sad }}
+          MyPlan - ADMIN
         </q-toolbar-title>
 
-
-
-
-        <div class="q-pa-md q-gutter-sm">
-          <q-btn  to="/login" @click="onDelayedClick" color="purple-3" text-color="black" label="Prijava" />
-          <q-btn to="/register" @click="onDelayedClick" color="purple-12" text-color="black" label="Registracija" />
-        </div>
+        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -54,12 +48,9 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
-import userPage from 'src/pages/userPage.vue'
-
-const sad = new Date();
 
 defineOptions({
-  name: 'MainLayout'
+  name: 'AdminLayout'
 })
 
 const linksList = [
@@ -69,22 +60,17 @@ const linksList = [
     link: '#/userPage'
   },
   {
-    title: 'adminPage',
-    caption: 'test admin page',
-    link: '#/adminPage'
-  },
-  {
     title: 'Početna stranica',
     caption: 'Početna stranica MyPlan-a',
     icon: 'home',
     link: '#/'
   },
   {
-    title: 'O nama',
+    title: 'popis korisnika',
     caption: 'Korisne informacije o MyPlan-u.',
     icon: 'info',
-    link: '#/onama'
-  }
+    link: '#/allUsers'
+  },
 ]
 
 const leftDrawerOpen = ref(false)
@@ -92,15 +78,5 @@ const leftDrawerOpen = ref(false)
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
-
-function onDelayedClick (e, go) {
-      e.preventDefault() // mandatory; we choose when we navigate
-
-      // console.log('triggering navigation in 2s')
-      setTimeout(() => {
-        // console.log('navigating as promised 2s ago')
-        go()
-      }, 300)
-    }
 
 </script>
