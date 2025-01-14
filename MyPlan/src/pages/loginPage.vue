@@ -26,12 +26,23 @@
       </div>
     </q-form>
 
+    <q-dialog v-model="popup">
+      <q-card>
+        <q-card-section>
+          <div class="text-h6">{{ popupPoruka }}</div>
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="OK" color="primary" @click="ClosePopup" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
   </div>
 </template>
 <script>
 
-import { useQuasar } from 'quasar'
-import { ref } from 'vue'
+import { ClosePopup, useQuasar } from 'quasar'
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 
@@ -41,6 +52,9 @@ export default {
     const $q = useQuasar()
         const email = ref(null)
         const lozinka = ref(null)
+        const popup = ref(false)
+        const popupPoruka = ref('')
+        const user=([])
 
         const login = async () => {
         const loginData = {
@@ -48,18 +62,36 @@ export default {
         password: lozinka.value,
         }
         await axios.post('http://localhost:3000/api/login/', loginData)
-        .then(result => {
-          console.log(result.data);
+        .then(results => {
+          user.value = results.data[0];
+          if(user.admin == 1){
+          popupPoruka.value =(results.data);
+          popup.value = true;
+          }
+          else{
+            popupPoruka.value =(results.data);
+          popup.value = true;
+          }
         })
         .catch(error => {
           console.error("Error pokušavajući se loginati:", error);
         });
     }
 
+    const ClosePopup = () => {
+      popup.value = false;
+      if(user.admin == 1){
+      }
+    };
+
     return {
       email,
       lozinka,
+      popup,
+      popupPoruka,
+      ClosePopup,
       login,
+      user,
 
 
     }

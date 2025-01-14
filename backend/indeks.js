@@ -70,7 +70,6 @@ app.post("/api/login", (request, response) => {
       const user = results[0];
       if(user.admin == 1 ){
         response.json({
-            message: "Uspješno logiranje admina.",
             user: {
               id_user: user.id_user,
               user_ime: user.user_ime,
