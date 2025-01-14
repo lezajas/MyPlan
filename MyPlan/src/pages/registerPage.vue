@@ -31,7 +31,7 @@
         :rules="[ val => val && val.length > 0 || 'Unos je potreban!']"
       />
 
-      <q-input filled v-model="date" label="Datum rođenja. *" hint="Upišite vaš datum rođenja." mask="date" :rules="['date']">
+      <q-input filled v-model="datumRod" label="Datum rođenja. *" hint="Upišite vaš datum rođenja." mask="date" :rules="['date']">
       <template v-slot:append>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -46,7 +46,7 @@
     </q-input>
 
       <div>
-        <q-btn label="Unesi" type="Unos" color="primary" @click="insertBooks"/>
+        <q-btn label="Unesi" type="Unos" color="primary" @click="insertUser"/>
       </div>
     </q-form>
 
@@ -63,6 +63,7 @@ import axios from 'axios';
 
 export default {
   setup () {
+
     const $q = useQuasar()
         const ime = ref(null)
         const email = ref(null)
@@ -76,21 +77,20 @@ export default {
         lozinka: lozinka.value,
         datumRod: datumRod.value,
       }
-        await axios.post('http://localhost:3000/api/unos_knjiga/', formData)
+        await axios.post('http://localhost:3000/api/unos_user/', formData)
         .then(result => {
           console.log(result.data);
         })
         .catch(error => {
-          console.error("Error loading books:", error);
+          console.error("Error loading users:", error);
         });
     }
 
     return {
-      date: ref('2019/02/01'),
+      datumRod: ref('2019/02/01'),
       ime,
       email,
       lozinka,
-      datumRod,
       insertUser,
 
 
