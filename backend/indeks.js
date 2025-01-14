@@ -78,23 +78,34 @@ app.post("/api/login", (request, response) => {
     connection.query("SELECT * FROM MYPLAN_user WHERE user_email = ? AND user_password = ?", [email, password], (error, results) => {
       if (error) throw error;
   
-      if (results.length === 0) {
+      if (results.length == 0) {
         return response.send("Pogrešan email ili lozinka." );
       }
   
       const user = results[0];
-  
-      response.json({
-        message: "Uspješno logiranje.",
-        user: {
-          id_user: user.id_user,
-          user_ime: user.user_ime,
-          user_email: user.user_email
-        }
-      });
+      if(user.admin == 1 ){
+        response.json({
+            message: "Uspješno logiranje admina.",
+            user: {
+              id_user: user.id_user,
+              user_ime: user.user_ime,
+              user_email: user.user_email,
+              user_admin: user.admin
+            }
+          });
+      }
+      else{
+        response.json({
+            message: "Uspješno logiranje.",
+            user: {
+              id_user: user.id_user,
+              user_ime: user.user_ime,
+              user_email: user.user_email
+            }
+          });
+      }
     });
   });
-
 app.listen(port, () => {
     console.log("Server running at port: " + port);
 });
