@@ -18,6 +18,7 @@ const routes = [
     component: UserLayout,
     children: [
       {path: '/userPage',name: "userPage", component: () => import('pages/userPage.vue')},
+      {path: '/userInfo',name: "userInfo", component: () => import('pages/userInfo.vue')},
     ],
 },
 

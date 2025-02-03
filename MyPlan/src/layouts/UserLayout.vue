@@ -90,13 +90,13 @@ const linksList = [
     title: 'Početna stranica',
     caption: 'Početna stranica MyPlan-a',
     icon: 'home',
-    link: '#/'
+    link: '#/userPage'
   },
   {
-    title: 'O nama',
+    title: 'Informacije o korisniku',
     caption: 'Korisne informacije o MyPlan-u.',
     icon: 'info',
-    link: '#/onama'
+    link: '#/userinfo'
   }
 ]
 

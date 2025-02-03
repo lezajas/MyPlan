@@ -54,7 +54,6 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
-import userPage from 'src/pages/userPage.vue'
 
 const sad = new Date();
 
@@ -63,16 +62,6 @@ defineOptions({
 })
 
 const linksList = [
-  {
-    title: 'UserPage',
-    caption: 'test user page',
-    link: '#/userPage'
-  },
-  {
-    title: 'adminPage',
-    caption: 'test admin page',
-    link: '#/adminPage'
-  },
   {
     title: 'Početna stranica',
     caption: 'Početna stranica MyPlan-a',

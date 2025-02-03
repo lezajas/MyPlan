@@ -68,16 +68,11 @@ defineOptions({
 })
 
 const linksList = [
-  {
-    title: 'UserPage',
-    caption: 'test user page',
-    link: '#/userPage'
-  },
-  {
-    title: 'Početna stranica',
-    caption: 'Početna stranica MyPlan-a',
-    icon: 'home',
-    link: '#/'
+{
+    title: 'Pocetna stranica admina',
+    caption: '',
+    icon: 'info',
+    link: '#/adminPage'
   },
   {
     title: 'popis korisnika',

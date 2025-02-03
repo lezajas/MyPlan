@@ -54,8 +54,7 @@
 
   </div>
 </template>
-<script>
-
+<script >
 import { useQuasar } from 'quasar'
 import { ref } from 'vue'
 import axios from 'axios';
