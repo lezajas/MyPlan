@@ -44,7 +44,7 @@
 import { ClosePopup, useQuasar } from 'quasar'
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-
+import { useRouter } from 'vue-router';
 
 export default {
   setup () {
@@ -56,21 +56,45 @@ export default {
         const popupPoruka = ref('')
         const user=([])
 
+        const router = useRouter();
         const login = async () => {
         const loginData = {
         email: email.value,
         password: lozinka.value,
         }
         await axios.post('http://localhost:3000/api/login/', loginData)
-        .then(results => {
-          user.value = results.data[0];
-          if(user.admin == 1){
-          popupPoruka.value =(results.data);
+        .then(result => {
+          if(result.data.user_admin == 1){
+            const userData = { // spremanje u usedata ali ovdje je admin
+            id_user: result.data.id_user,
+            user_ime: result.data.user_ime,
+            user_email: result.data.user_email,
+            user_admin: result.data.user_admin
+          };
+          popupPoruka.value =("Uspiješna prijava admina!");
           popup.value = true;
+          localStorage.setItem('admin', JSON.stringify(userData));
+
+          setTimeout(() => {
+            popup.value = false; // Sakrij alert
+            router.replace({ name: 'adminPage' });
+          }, 1000);
           }
           else{
-            popupPoruka.value =(results.data);
+            const userData = { // spremanje u userdata ali ovdje nije admin
+            id_user: result.data.id_user,
+            user_ime: result.data.user_ime,
+            user_email: result.data.user_email
+          };
+            localStorage.setItem('user', JSON.stringify(userData));
+
+            popupPoruka.value =("Uspiješna prijava!");
           popup.value = true;
+          localStorage.setItem('user', JSON.stringify(userData));
+          setTimeout(() => {
+            popup.value = false; // Sakrij alert
+            router.replace({ name: 'userPage' });
+          }, 1000);
           }
         })
         .catch(error => {
@@ -78,11 +102,6 @@ export default {
         });
     }
 
-    const ClosePopup = () => {
-      popup.value = false;
-      if(user.admin == 1){
-      }
-    };
 
     return {
       email,

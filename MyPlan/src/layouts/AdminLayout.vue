@@ -19,7 +19,9 @@
           MyPlan - ADMIN
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div class="q-pa-md q-gutter-sm">
+          <q-btn  to="#/" @click="onLogout" color="purple-3" text-color="black" label="Log out." />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -48,6 +50,18 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter();
+
+const onLogout = (e) => {
+  e.preventDefault();
+
+  setTimeout(() => {
+    localStorage.removeItem('admin'); // Briše korisničke podatke
+    console.log("Admin je odjavljen.");
+    router.replace('/'); // Preusmjeravanje na početnu stranicu
+  }, 300);
+};
 
 defineOptions({
   name: 'AdminLayout'

@@ -70,22 +70,17 @@ app.post("/api/login", (request, response) => {
       const user = results[0];
       if(user.admin == 1 ){
         response.json({
-            user: {
               id_user: user.id_user,
               user_ime: user.user_ime,
               user_email: user.user_email,
               user_admin: user.admin
-            }
           });
       }
       else{
         response.json({
-            message: "Uspješno logiranje.",
-            user: {
               id_user: user.id_user,
               user_ime: user.user_ime,
               user_email: user.user_email
-            }
           });
       }
     });
@@ -93,5 +88,3 @@ app.post("/api/login", (request, response) => {
 app.listen(port, () => {
     console.log("Server running at port: " + port);
 });
-
-// npm install -g nodemon

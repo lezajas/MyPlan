@@ -17,7 +17,7 @@ const routes = [
     path: '/UserLayout',
     component: UserLayout,
     children: [
-      {path: '/userPage', component: () => import('pages/userPage.vue')},
+      {path: '/userPage',name: "userPage", component: () => import('pages/userPage.vue')},
     ],
 },
 
@@ -25,7 +25,7 @@ const routes = [
   path: '/AdminLayout',
   component: AdminLayout,
   children: [
-    {path: '/adminPage', component: () => import('pages/adminPage.vue')},
+    {path: '/adminPage', name: "adminPage", component: () => import('pages/adminPage.vue')},
     {path: '/allUsers', component: () => import('pages/allUsers.vue')},
   ],
 },

@@ -1,60 +1,109 @@
 <template>
-  <q-layout view="hhh lpR fff">
-
-    <q-header elevated class="bg-primary text-white" height-hint="98">
+  <q-layout view="lHh Lpr lFf">
+    <q-header elevated>
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-btn
+          flat
+          dense
+          round
+          icon="menu"
+          aria-label="Menu"
+          @click="toggleLeftDrawer"
+        />
 
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+        <q-toolbar-title text-h1>
+          <q-avatar size="100px">
+            <img src="/icons/logo1.png">
           </q-avatar>
-          Dobrodošli
-        </q-toolbar-title>
-      </q-toolbar>
 
-      <q-tabs align="left">
-        <q-route-tab to="/" label="Početna stranica" />
-        <q-route-tab to="/page2" label="Page Two" />
-        <q-route-tab to="/page3" label="Page Three" />
-      </q-tabs>
+          MyPlan - Dobrodošao {{ ime }} !
+        </q-toolbar-title>
+
+
+
+
+        <div class="q-pa-md q-gutter-sm">
+          <q-btn  to="#/" @click="onLogout" color="purple-3" text-color="black" label="Log out." />
+        </div>
+      </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
-      <!-- drawer content -->
+    <q-drawer
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+    >
+      <q-list>
+
+
+        <EssentialLink
+          v-for="link in linksList"
+          :key="link.title"
+          v-bind="link"
+        />
+      </q-list>
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
-
-    <q-footer elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          <div>Title</div>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
-
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
+import EssentialLink from 'components/EssentialLink.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter();
 
-export default {
-  setup () {
-    const leftDrawerOpen = ref(false)
+const sad = new Date();
+const user = JSON.parse(localStorage.getItem('user'));
+const ime = user.user_ime;
 
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+
+const onLogout = (e) => {
+  e.preventDefault(); // Sprečava defaultno ponašanje dugmeta
+
+  setTimeout(() => {
+    localStorage.removeItem('user'); // Briše korisničke podatke
+    console.log("Korisnik je odjavljen.");
+    router.replace('/'); // 🔄 Preusmjeravanje na početnu stranicu
+  }, 300);
+};
+
+function onDelayedClick (e, go) {
+      e.preventDefault() // mandatory; we choose when we navigate
+
+      // console.log('triggering navigation in 2s')
+      setTimeout(() => {
+        // console.log('navigating as promised 2s ago')
+        go()
+      }, 300)
     }
+
+defineOptions({
+  name: 'MainLayout'
+})
+
+const linksList = [
+  {
+    title: 'Početna stranica',
+    caption: 'Početna stranica MyPlan-a',
+    icon: 'home',
+    link: '#/'
+  },
+  {
+    title: 'O nama',
+    caption: 'Korisne informacije o MyPlan-u.',
+    icon: 'info',
+    link: '#/onama'
   }
+]
+
+const leftDrawerOpen = ref(false)
+
+function toggleLeftDrawer () {
+  leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
 </script>
