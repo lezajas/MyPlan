@@ -91,7 +91,7 @@ export default {
     const staralozinka = ref('');
 
     const promjeniIme = async () => {
-      if (!ime.value || ime.value().length === 0) {
+      if (!ime.value || ime.value.length === 0) {
         prikaziPopup.value = true; // Prikaži popup ako je prazno
         return;
       }

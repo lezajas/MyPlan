@@ -55,8 +55,8 @@ export default {
         const popup = ref(false)
         const popupPoruka = ref('')
         const user=([])
-
         const router = useRouter();
+
         const login = async () => {
         const loginData = {
         email: email.value,
@@ -64,6 +64,10 @@ export default {
         }
         await axios.post('http://localhost:3000/api/login/', loginData)
         .then(result => {
+
+
+
+
           if(result.data.user_admin == 1){
             const userData = { // spremanje u usedata ali ovdje je admin
             id_user: result.data.id_user,
@@ -100,7 +104,9 @@ export default {
           }
         })
         .catch(error => {
-          console.error("Error pokušavajući se loginati:", error);
+          popupPoruka.value = "Pogrešan email ili lozinka!";
+      popup.value = true;
+      return;
         });
     }
 

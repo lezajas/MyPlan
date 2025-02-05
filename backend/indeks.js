@@ -63,9 +63,9 @@ app.post("/api/login", (request, response) => { //login api
     connection.query("SELECT * FROM MYPLAN_user WHERE user_email = ? AND user_password = ?", [email, password], (error, results) => {
       if (error) throw error;
   
-      if (results.length == 0) {
-        return response.send("Pogrešan email ili lozinka." );
-      }
+      if (results.length === 0) {
+        return response.status(401).json({ error: "Pogrešan email ili lozinka" });
+    }
   
       const user = results[0];
       if(user.admin == 1 ){ // provjera da li je user admin
@@ -100,8 +100,8 @@ app.post("/api/login", (request, response) => { //login api
 
 app.post("/api/user_email", (request, response) => { //izmjena emaila
     const data = request.body;
-    user_id = [data.id]
-    user_email = [data.email]
+    user_id = data.id
+    user_email = data.email
     connection.query("UPDATE MYPLAN_user SET user_email= ? WHERE id_user = ? ", [user_email, user_id], (error, results) => {
         if (error) throw error;
         response.send(results);
@@ -110,8 +110,8 @@ app.post("/api/user_email", (request, response) => { //izmjena emaila
 
 app.post("/api/user_lozinka", (request, response) => { //izmjena lozinke
     const data = request.body;
-    user_id = [data.id]
-    user_password = [data.lozinka]
+    user_id = data.id
+    user_password = data.lozinka
     connection.query("UPDATE MYPLAN_user SET user_password= ? WHERE id_user = ? ", [user_password, user_id], (error, results) => {
         if (error) throw error;
         response.send(results);
