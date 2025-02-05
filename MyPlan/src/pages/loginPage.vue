@@ -69,7 +69,8 @@ export default {
             id_user: result.data.id_user,
             user_ime: result.data.user_ime,
             user_email: result.data.user_email,
-            user_admin: result.data.user_admin
+            user_password: result.data.user_password,
+            user_admin: result.data.user_admin,
           };
           popupPoruka.value =("Uspiješna prijava admina!");
           popup.value = true;
@@ -84,7 +85,8 @@ export default {
             const userData = { // spremanje u userdata ali ovdje nije admin
             id_user: result.data.id_user,
             user_ime: result.data.user_ime,
-            user_email: result.data.user_email
+            user_email: result.data.user_email,
+            user_password: result.data.user_password,
           };
             localStorage.setItem('user', JSON.stringify(userData));
 

@@ -62,7 +62,7 @@ const ime = user.user_ime;
 
 
 const onLogout = (e) => {
-  e.preventDefault(); // Sprečava defaultno ponašanje dugmeta
+  e.preventDefault();
 
   setTimeout(() => {
     localStorage.removeItem('user'); // Briše korisničke podatke
@@ -82,21 +82,27 @@ function onDelayedClick (e, go) {
     }
 
 defineOptions({
-  name: 'MainLayout'
+  name: 'UserLayout'
 })
 
 const linksList = [
   {
     title: 'Početna stranica',
-    caption: 'Početna stranica MyPlan-a',
+    caption: 'Početna korisnička stranica',
     icon: 'home',
     link: '#/userPage'
   },
   {
     title: 'Informacije o korisniku',
-    caption: 'Korisne informacije o MyPlan-u.',
+    caption: 'Informacije o vašem računu.',
     icon: 'info',
     link: '#/userinfo'
+  },
+  {
+  title: 'Postavke korisnika',
+    caption: 'Izmjena korisničkih krendeciala',
+    icon: 'info',
+    link: '#/userPostavke'
   }
 ]
 

@@ -45,7 +45,7 @@ app.get("/api/user/:id", (request, response) => { //dovhaćanje podataka o useru
 });
 
 
-app.post("/api/unos_user", (request, response) => {
+app.post("/api/unos_user", (request, response) => { //register api 
     const data = request.body;
     unos_user = [[data.ime, data.email, data.lozinka, data.datumRod]]
     connection.query("INSERT INTO MYPLAN_user (user_ime, user_email, user_password, user_datumRod) VALUES ?", [unos_user], (error, results) => {
@@ -54,7 +54,7 @@ app.post("/api/unos_user", (request, response) => {
     });
 });
 
-app.post("/api/login", (request, response) => {
+app.post("/api/login", (request, response) => { //login api
     const data = request.body;
     email=data.email;
     password=data.password;
@@ -73,6 +73,7 @@ app.post("/api/login", (request, response) => {
               id_user: user.id_user,
               user_ime: user.user_ime,
               user_email: user.user_email,
+              user_password: user.user_password,
               user_admin: user.admin
           });
       }
@@ -80,11 +81,48 @@ app.post("/api/login", (request, response) => {
         response.json({
               id_user: user.id_user,
               user_ime: user.user_ime,
-              user_email: user.user_email
+              user_email: user.user_email,
+              user_password: user.user_password
           });
       }
     });
   });
+
+  app.post("/api/user_ime", (request, response) => { //izmjena imena
+    const data = request.body;
+    user_id = data.id
+    user_ime = data.ime
+    connection.query("UPDATE MYPLAN_user SET user_ime= ? WHERE id_user = ? ", [user_ime, user_id], (error, results) => {
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+app.post("/api/user_email", (request, response) => { //izmjena emaila
+    const data = request.body;
+    user_id = [data.id]
+    user_email = [data.email]
+    connection.query("UPDATE MYPLAN_user SET user_email= ? WHERE id_user = ? ", [user_email, user_id], (error, results) => {
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+app.post("/api/user_lozinka", (request, response) => { //izmjena lozinke
+    const data = request.body;
+    user_id = [data.id]
+    user_password = [data.lozinka]
+    connection.query("UPDATE MYPLAN_user SET user_password= ? WHERE id_user = ? ", [user_password, user_id], (error, results) => {
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+
+
+
+
+
 app.listen(port, () => {
     console.log("Server running at port: " + port);
 });

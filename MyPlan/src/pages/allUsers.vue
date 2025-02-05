@@ -47,6 +47,7 @@
 <script>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import dayjs from 'dayjs';
 
 const style1 = {
   fontSize: '18px'
@@ -105,11 +106,18 @@ export default {
   setup() {
     const users = ref([]);
 
+    // Funkcija za formatiranje datuma
+    const formatirajDatum = (datum) => {
+      return datum ? dayjs(datum).format('DD.MM.YYYY') : 'N/A';
+    };
+
     const loadUsers = async () => {
       try {
         const result = await axios.get('http://localhost:3000/api/user/');
-        console.log('Podaci iz API-ja:', result.data);
-        users.value = result.data; // Pretpostavlja se da API vraća niz objekata
+        users.value = result.data.map(user => ({ //map prolazi kroz svaki objekt user-a
+          ...user, //kopira sve postojeće podatke korisnika (id_user, user_ime, user_email, itd.)
+          user_datumRod: formatirajDatum(user.user_datumRod)
+        }));
       } catch (error) {
         console.error('Greška pri učitavanju korisnika:', error);
       }
@@ -121,7 +129,8 @@ export default {
 
     return {
       columns,
-      users
+      users,
+      formatirajDatum
     };
   }
 };

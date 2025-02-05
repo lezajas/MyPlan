@@ -54,8 +54,9 @@
 <script setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import dayjs from 'dayjs';
 
-const sad = new Date();
+const sad = dayjs().format('DD.MM.YYYY');
 
 defineOptions({
   name: 'MainLayout'
