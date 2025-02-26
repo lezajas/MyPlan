@@ -47,6 +47,19 @@
             </q-popup-proxy>
           </q-icon>
         </template>
+
+        <q-dialog v-model="popupPoruka">
+        <q-card class="q-pa-md">
+          <q-card-section class="row items-center">
+            <q-icon name="thumb_up" color="green" size="24px" class="q-mr-sm" />
+            <span>{{ poruka }}</span>
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
       </q-input>
 
       <div>
@@ -68,6 +81,8 @@ export default {
     const lozinka = ref('');
     const datumRod = ref(dayjs().format('YYYY-MM-DD')); // Početni datum
     const datumRodPrikaz = ref(dayjs(datumRod.value).format('DD.MM.YYYY')); // Format prikaza
+    const popupPoruka = ref(false);
+    const poruka = ref("");
 
     // Funkcija za formatiranje datuma nakon odabira
     const formatirajDatum = () => {
@@ -84,7 +99,8 @@ export default {
 
       await axios.post('http://localhost:3000/api/unos_user/', formData)
         .then(result => {
-          console.log(result.data);
+          poruka.value = "Korisnik uspješno registriran!";
+          popupPoruka.value = true;
         })
         .catch(error => {
           console.error("Error loading users:", error);
@@ -99,6 +115,8 @@ export default {
       datumRodPrikaz,
       formatirajDatum,
       insertUser,
+      popupPoruka,
+      poruka,
     };
   },
 };

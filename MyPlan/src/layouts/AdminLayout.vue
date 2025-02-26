@@ -70,15 +70,27 @@ defineOptions({
 const linksList = [
 {
     title: 'Pocetna stranica admina',
-    caption: '',
-    icon: 'info',
+    caption: 'Početna stranica admina',
+    icon: 'home',
     link: '#/adminPage'
   },
   {
-    title: 'popis korisnika',
-    caption: 'Korisne informacije o MyPlan-u.',
+    title: 'Info',
+    caption: 'Informacije o adminu.',
     icon: 'info',
+    link: '#/adminInfo'
+  },
+  {
+    title: 'Popis korisnika',
+    caption: 'Popis svih registriranih korisnika.',
+    icon: 'menu',
     link: '#/allUsers'
+  },
+  {
+    title: 'Brisanje kosrinsika',
+    caption: 'Ovdje brišemo registrirane korisnike.',
+    icon: 'delete',
+    link: '#/adminDelete'
   },
 ]
 

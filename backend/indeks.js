@@ -78,7 +78,7 @@ app.post("/api/login", (request, response) => { //login api
           });
       }
       else{
-        response.json({
+        response.json({//ovdje user se upisuje
               id_user: user.id_user,
               user_ime: user.user_ime,
               user_email: user.user_email,
@@ -104,9 +104,10 @@ app.post("/api/user_email", (request, response) => { //izmjena emaila
     user_email = data.email
     connection.query("UPDATE MYPLAN_user SET user_email= ? WHERE id_user = ? ", [user_email, user_id], (error, results) => {
         if (error) throw error;
-        response.send(results);
+        response.send({message: 'Email uspiješno promjenjen.'});
     });
 });
+
 
 app.post("/api/user_lozinka", (request, response) => { //izmjena lozinke
     const data = request.body;
@@ -114,11 +115,17 @@ app.post("/api/user_lozinka", (request, response) => { //izmjena lozinke
     user_password = data.lozinka
     connection.query("UPDATE MYPLAN_user SET user_password= ? WHERE id_user = ? ", [user_password, user_id], (error, results) => {
         if (error) throw error;
-        response.send(results);
+        response.send({message: 'Lozinka uspiješno promjenjena.'});
     });
 });
 
-
+app.delete('/api/user/:id', (req, res) => {
+    const userId = req.params.id;
+    connection.query('DELETE FROM MYPLAN_user WHERE id_user = ?', [userId], (error, results) => {
+        if (error) throw error;
+        res.json({ message: 'Korisnik uspješno obrisan' });
+    });
+});
 
 
 

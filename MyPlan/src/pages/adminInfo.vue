@@ -23,10 +23,10 @@
 </template>
 
 <script>
-const user = JSON.parse(localStorage.getItem('user'));
-const ime = user.user_ime;
-const email = user.user_email;
-const id = user.id_user;
+const admin = JSON.parse(localStorage.getItem('admin'));
+const ime = admin.user_ime;
+const email = admin.user_email;
+const id = admin.id_user;
 
 
 export default {

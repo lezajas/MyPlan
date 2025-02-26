@@ -67,7 +67,7 @@ const onLogout = (e) => {
   setTimeout(() => {
     localStorage.removeItem('user'); // Briše korisničke podatke
     console.log("Korisnik je odjavljen.");
-    router.replace('/'); // 🔄 Preusmjeravanje na početnu stranicu
+    router.replace('/'); //Preusmjeravanje na početnu stranicu
   }, 300);
 };
 
@@ -101,7 +101,7 @@ const linksList = [
   {
   title: 'Postavke korisnika',
     caption: 'Izmjena korisničkih krendeciala',
-    icon: 'info',
+    icon: 'settings',
     link: '#/userPostavke'
   }
 ]

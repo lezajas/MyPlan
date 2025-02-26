@@ -13,6 +13,7 @@
     lazy-rules
     :rules="[ val => val && val.length > 0 || 'Unos je potreban!']"
   />
+  <q-separator size="3px" spaced="md" />
   <q-btn label="Promjeni ime" type="promjenaImena" color="primary" @click="promjeniIme" />
 </q-card>
 
@@ -25,6 +26,7 @@
     lazy-rules
     :rules="[ val => val && val.length > 0 || 'Unos je potreban!']"
   />
+  <q-separator size="3px" spaced="md" />
   <q-btn label="Promjeni email" type="promjenaEmaila" color="primary" @click="promjeniEmail" />
 </q-card>
 
@@ -42,7 +44,8 @@
         label="Nova Lozinka *"
         hint="Upišite vašu novu lozinku"
       />
-        <q-btn label="Unesi" type="promjenaLozinke" color="primary" @click="promjeniLozinku"/>
+      <q-separator size="3px" spaced="md" />
+        <q-btn label="Promjeni lozinku" type="promjenaLozinke" color="primary" @click="promjeniLozinku"/>
       </q-card>
     </q-form>
   </div>
@@ -52,6 +55,18 @@
         <q-card-section class="row items-center">
           <q-icon name="warning" color="red" size="24px" class="q-mr-sm" />
           <span>Uneseno polje nemože biti prazno!</span>
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="Uredu" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
+    <q-dialog v-model="uspijehPopup">
+      <q-card class="q-pa-md">
+        <q-card-section class="row items-center">
+          <q-icon name="thumb_up" color="green" size="24px" class="q-mr-sm" />
+          <span>Uspiješna promijena postavki.</span>
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="Uredu" color="primary" v-close-popup />
@@ -82,9 +97,10 @@ export default {
   setup() {
     const user = JSON.parse(localStorage.getItem('user'));
     const id = user.id_user;
-    const trenutnalozinka = user.user_password;
+    const trenutnalozinka = ref(user.user_password);
     const prikaziPopup = ref(false);
     const staralozinkaPopup = ref(false);
+    const uspijehPopup = ref(false);
     const ime = ref('');
     const email = ref('');
     const lozinka = ref('');
@@ -102,7 +118,7 @@ export default {
       }
       await axios.post('http://localhost:3000/api/user_ime/', formData)
         .then(result => {
-          console.log(result.data);
+          uspijehPopup.value = true;
         })
         .catch(error => {
           console.error("Error loading users:", error);
@@ -111,7 +127,7 @@ export default {
 
 
     const promjeniEmail = async () => {
-      if (!email.value || email.value().length === 0) {
+      if (!email.value || email.value.length === 0) {
         prikaziPopup.value = true; // Prikaži popup ako je prazno
         return;
       }
@@ -122,7 +138,7 @@ export default {
       }
       await axios.post('http://localhost:3000/api/user_email/', formData)
         .then(result => {
-          console.log(result.data);
+          uspijehPopup.value = true;
         })
         .catch(error => {
           console.error("Error loading users:", error);
@@ -130,7 +146,7 @@ export default {
     };
 
     const promjeniLozinku = async () => {
-    if (staralozinka.value !== trenutnalozinka) {
+    if (staralozinka.value !== trenutnalozinka.value) {
     staralozinkaPopup.value = true; // Prikazuje poruku ako lozinka nije točna
     return;
       }
@@ -148,7 +164,9 @@ export default {
       }
       await axios.post('http://localhost:3000/api/user_lozinka/', formData)
         .then(result => {
-          console.log(result.data);
+        trenutnalozinka.value = lozinka.value;
+
+        uspijehPopup.value = true;
         })
         .catch(error => {
           console.error("Error loading users:", error);
@@ -166,6 +184,7 @@ export default {
       promjeniLozinku,
       prikaziPopup,
       staralozinkaPopup,
+      uspijehPopup,
     };
   },
 };

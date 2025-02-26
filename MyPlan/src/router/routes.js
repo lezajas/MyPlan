@@ -29,6 +29,8 @@ const routes = [
   children: [
     {path: '/adminPage', name: "adminPage", component: () => import('pages/adminPage.vue')},
     {path: '/allUsers', component: () => import('pages/allUsers.vue')},
+    {path: '/adminDelete', name: "adminDelte",component: () => import('pages/adminDelete.vue')},
+    {path: '/adminInfo', name: "adminInfo",component: () => import('pages/adminInfo.vue')},
   ],
 },
 
