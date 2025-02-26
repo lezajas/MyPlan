@@ -67,7 +67,8 @@ const columns = [
   { name: 'user_ime', label: 'Ime', field: 'user_ime', align: 'left', sortable: true, style: style1, headerStyle: style2 },
   { name: 'user_email', label: 'Email', field: 'user_email', align: 'left', style: style1, headerStyle: style2 },
   { name: 'user_password', label: 'Password', field: 'user_password', align: 'left', style: style1, headerStyle: style2 },
-  { name: 'user_datumRod', label: 'Datum Rođenja', field: 'user_datumRod', align: 'left', style: style1, headerStyle: style2 }
+  { name: 'user_datumRod', label: 'Datum Rođenja', field: 'user_datumRod', align: 'left', style: style1, headerStyle: style2 },
+  { name: 'admin', label: 'Admin? (1=da)', field: 'admin', align: 'left', style: style1, headerStyle: style2 }
 ];
 
 export default {

@@ -20,6 +20,8 @@ const routes = [
       {path: '/userPage',name: "userPage", component: () => import('pages/userPage.vue')},
       {path: '/userInfo',name: "userInfo", component: () => import('pages/userInfo.vue')},
       {path: '/userPostavke',name: "userPostavke", component: () => import('pages/userPostavke.vue')},
+      {path: '/userPlans',name: "userPlans", component: () => import('pages/userPlans.vue')},
+      {path: '/userViewPlans',name: "userViewPlans", component: () => import('pages/userViewPlans.vue')},
     ],
 },
 

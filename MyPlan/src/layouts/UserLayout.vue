@@ -99,6 +99,18 @@ const linksList = [
     link: '#/userinfo'
   },
   {
+    title: 'Dodavanje planova',
+    caption: 'Dodavanje novoga plana',
+    icon: 'add',
+    link: '#/userPlans'
+  },
+  {
+    title: 'Pregledaj sve planove',
+    caption: 'Prelgedavanje svih planova korisnika.',
+    icon: 'visibility',
+    link: '#/userViewPlans'
+  },
+  {
   title: 'Postavke korisnika',
     caption: 'Izmjena korisničkih krendeciala',
     icon: 'settings',

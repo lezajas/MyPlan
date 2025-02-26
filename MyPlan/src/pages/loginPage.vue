@@ -106,6 +106,9 @@ export default {
         .catch(error => {
           popupPoruka.value = "Pogrešan email ili lozinka!";
       popup.value = true;
+      setTimeout(() => {
+            popup.value = false; // Sakrij alert
+          }, 1000);
       return;
         });
     }
@@ -125,3 +128,4 @@ export default {
   }
 }
 </script>
+
