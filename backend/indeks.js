@@ -119,11 +119,20 @@ app.post("/api/user_lozinka", (request, response) => { //izmjena lozinke
     });
 });
 
-app.delete('/api/user/:id', (req, res) => {
+app.delete('/api/user/:id', (req, res) => { //brisanje korisnika
     const userId = req.params.id;
     connection.query('DELETE FROM MYPLAN_user WHERE id_user = ?', [userId], (error, results) => {
         if (error) throw error;
         res.json({ message: 'Korisnik uspješno obrisan' });
+    });
+});
+
+app.post("/api/unos_zadataka", (request, response) => { //unos zadatka api
+    const data = request.body;
+    unos_zadatka = [[data.ime, data.datum, data.vrijeme, data.id_user]]
+    connection.query("INSERT INTO MYPLAN_zadaci (ime_zadatka, datum_zadatka, vrijeme_zadatka, id_user) VALUES ?", [unos_zadatka], (error, results) => {
+        if (error) throw error;
+        response.send(results);
     });
 });
 
