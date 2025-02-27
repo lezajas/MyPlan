@@ -13,18 +13,20 @@
       separator="horizontal"
       v-if="tasks.length > 0"
     >
-      <template v-slot:body-cell-preostaloVrijeme="props">
-        <q-td :props="props">
-          {{ izracunajPreostaloVrijeme(props.row.datum_zadatka, props.row.vrijeme_zadatka) }}
-        </q-td>
-      </template>
-
       <template v-slot:body-cell-obavljen="props">
         <q-td :props="props">
           <q-toggle
             v-model="props.row.obavljen"
             @update:model-value="oznaciObavljen(props.row)"
           />
+        </q-td>
+      </template>
+
+      <template v-slot:body-cell-akcija="props">
+        <q-td :props="props">
+          <q-btn color="red" icon="delete" @click="obrisiZadatak(props.row)" dense flat>
+            <q-tooltip>Obriši zadatak</q-tooltip>
+          </q-btn>
         </q-td>
       </template>
     </q-table>
@@ -38,12 +40,6 @@
 <script>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-
-dayjs.extend(duration);
-dayjs.extend(customParseFormat);
 
 export default {
   setup() {
@@ -56,30 +52,27 @@ export default {
       { name: "ime_zadatka", label: "Naziv", field: "ime_zadatka", align: "left" },
       { name: "datum_zadatka", label: "Datum", field: "datum_zadatka", align: "left" },
       { name: "vrijeme_zadatka", label: "Vrijeme", field: "vrijeme_zadatka", align: "left" },
-      { name: "obavljen", label: "Obavljen", field: "obavljen", align: "center" }
+      { name: "obavljen", label: "Obavljen", field: "obavljen", align: "center" },
+      { name: "akcija", label: "Brisanje", align: "center" }
     ];
 
     const ucitajZadatke = async () => {
       if (!userId) return;
-      try {
         const response = await axios.get(`http://localhost:3000/api/zadaci/${userId}`);
         tasks.value = response.data.map((task) => ({
           ...task,
           obavljen: task.obavljen === "da", // Pretvaranje "da"/"ne" u boolean
         }));
-      } catch (error) {
-        console.error("Greška pri dohvaćanju zadataka:", error);
-      }
     };
 
     const oznaciObavljen = async (task) => {
-      try {
         await axios.post(`http://localhost:3000/api/update_zadatak/${task.ID_zadatka}`);
         task.obavljen = !task.obavljen; // Odmah ažuriraj prikaz
-      } catch (error) {
-        console.error("Greška pri ažuriranju zadatka:", error);
-      }
     };
+
+    const obrisiZadatak = async (task) => {
+    const response = await axios.delete(`http://localhost:3000/api/delete_zadatak/${task.ID_zadataka}`);
+};
 
     onMounted(() => {
       ucitajZadatke();
@@ -90,6 +83,7 @@ export default {
       tasks,
       columns,
       oznaciObavljen,
+      obrisiZadatak,
     };
   },
 };

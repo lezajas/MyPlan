@@ -147,7 +147,7 @@ app.get("/api/zadaci/:id", (request, response) => { //dovhaćanje podataka o zad
 
 
 
-app.post("/api/update_zadatak/:id", (request, response) => {
+app.post("/api/update_zadatak/:id", (request, response) => {//obavljanje zadatka
     const { obavljen } = request.body;
     const id_zadatka = request.params.id; 
 
@@ -157,6 +157,12 @@ app.post("/api/update_zadatak/:id", (request, response) => {
     );
 });
 
+app.delete('/api/delete_zadatak/:id', (req, res) => {
+    const id_zadatka = req.params.id;
+    connection.query('DELETE FROM MYPLAN_zadaci WHERE ID_zadataka = ?', [id_zadatka], (error, results) => {
+        if (error) throw error;
+    });
+});
 
 app.listen(port, () => {
     console.log("Server running at port: " + port);
