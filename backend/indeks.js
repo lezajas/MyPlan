@@ -129,14 +129,33 @@ app.delete('/api/user/:id', (req, res) => { //brisanje korisnika
 
 app.post("/api/unos_zadataka", (request, response) => { //unos zadatka api
     const data = request.body;
-    unos_zadatka = [[data.ime, data.datum, data.vrijeme, data.id_user]]
-    connection.query("INSERT INTO MYPLAN_zadaci (ime_zadatka, datum_zadatka, vrijeme_zadatka, id_user) VALUES ?", [unos_zadatka], (error, results) => {
+    unos_zadatka = [[data.ime, data.datum, data.vrijeme, data.id_user, data.obavljen]]
+    connection.query("INSERT INTO MYPLAN_zadaci (ime_zadatka, datum_zadatka, vrijeme_zadatka, id_user, obavljen) VALUES ?", [unos_zadatka], (error, results) => {
         if (error) throw error;
         response.send(results);
     });
 });
 
 
+app.get("/api/zadaci/:id", (request, response) => { //dovhaćanje podataka o zadacima
+    const id = request.params.id;
+    connection.query("SELECT * FROM MYPLAN_zadaci WHERE id_user=?", [id], (error, results) => {
+        if (error) throw error;
+        response.send(results);
+    });
+});
+
+
+
+app.post("/api/update_zadatak/:id", (request, response) => {
+    const { obavljen } = request.body;
+    const id_zadatka = request.params.id; 
+
+    connection.query( "UPDATE MYPLAN_zadaci SET obavljen = ? WHERE ID_zadataka = ?",[obavljen, id_zadatka], (error, results) => {
+            if (error) throw error;
+        }
+    );
+});
 
 
 app.listen(port, () => {

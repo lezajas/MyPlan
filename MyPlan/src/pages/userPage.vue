@@ -11,11 +11,7 @@
 <script>
 const user = JSON.parse(localStorage.getItem('user'));
 
-if (user) {
-  console.log("Prijavljeni korisnik:", user);
-} else {
-  console.log("Nema prijavljenog korisnika.");
-}
+
 const ime = user.user_ime;
 
 export default {

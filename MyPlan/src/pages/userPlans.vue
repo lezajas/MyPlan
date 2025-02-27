@@ -1,5 +1,10 @@
 <template>
-  <div class="q-pa-md" style="max-width: 400px">
+   <q-page class="flex flex-center">
+    <div class="q-pa-md q-gutter-md" style="width: 900px">
+      <q-banner rounded class="bg-purple-8 text-white absolute-top text-center">
+      Dodaj novi zadatak.
+
+    </q-banner>
     <q-form class="q-gutter-md">
       <q-input
         filled
@@ -8,6 +13,7 @@
         hint="Upišite ime zadataka"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Unos je potreban!']"
+
       />
 
       <!-- Popravljeni unos za datum -->
@@ -71,6 +77,7 @@
       </div>
     </q-form>
   </div>
+</q-page>
 </template>
 
 <script>
@@ -88,6 +95,7 @@ export default {
     const datumPrikaz = ref(dayjs(datum.value).format('DD.MM.YYYY')); // Format prikaza
     const popupPoruka = ref(false);
     const poruka = ref("");
+    const obavljen=("NE");
 
     // Funkcija za formatiranje datuma nakon odabira
     const formatirajDatum = () => {
@@ -100,6 +108,7 @@ export default {
         datum: datumPrikaz.value, // Slanje datuma u formatu "YYYY-MM-DD"
         vrijeme: vrijeme.value,
         id_user: id_user,
+        obavljen: obavljen,
       };
 
       await axios.post('http://localhost:3000/api/unos_zadataka/', formData)
