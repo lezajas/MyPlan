@@ -149,9 +149,9 @@ app.get("/api/zadaci/:id", (request, response) => { //dovhaćanje podataka o zad
 
 app.post("/api/update_zadatak/:id", (request, response) => {//obavljanje zadatka
     const { obavljen } = request.body;
-    const id_zadatka = request.params.id; 
+    const ID_zadataka = request.params.id; 
 
-    connection.query( "UPDATE MYPLAN_zadaci SET obavljen = ? WHERE ID_zadataka = ?",[obavljen, id_zadatka], (error, results) => {
+    connection.query( "UPDATE MYPLAN_zadaci SET obavljen = ? WHERE ID_zadataka = ?",[obavljen, ID_zadataka], (error, results) => {
             if (error) throw error;
         }
     );

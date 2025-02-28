@@ -61,12 +61,15 @@ export default {
         const response = await axios.get(`http://localhost:3000/api/zadaci/${userId}`);
         tasks.value = response.data.map((task) => ({
           ...task,
-          obavljen: task.obavljen === "da", // Pretvaranje "da"/"ne" u boolean
+          obavljen: task.obavljen === "1", // Pretvaranje "da"/"ne" u boolean
         }));
     };
 
     const oznaciObavljen = async (task) => {
-        await axios.post(`http://localhost:3000/api/update_zadatak/${task.ID_zadatka}`);
+      const formData = {
+        obavljen: task.obavljen,
+      };
+        await axios.post(`http://localhost:3000/api/update_zadatak/${task.ID_zadataka}`, formData);
         task.obavljen = !task.obavljen; // Odmah ažuriraj prikaz
     };
 
