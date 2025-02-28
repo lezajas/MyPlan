@@ -49,7 +49,7 @@ export default {
     const popupPoruka = ref(false);
     const poruka = ref("");
 
-    // Funkcija za dohvaćanje korisnika iz baze
+
     const ucitajUsere = async () => {
       try {
         const response = await axios.get('http://localhost:3000/api/user/');
@@ -59,18 +59,16 @@ export default {
       }
     };
 
-    // Funkcija za brisanje odabranog korisnika
     const obrisiKorisnika = async () => {
       if (!selectedUser.value) return;
 
         await axios.delete(`http://localhost:3000/api/user/${selectedUser.value}`);
         poruka.value = "Korisnik uspješno obrisan!";
         popupPoruka.value = true;
-        ucitajUsere(); // Ponovno učitavanje liste korisnika
+        ucitajUsere();
 
     };
 
-    // Automatski učitaj korisnike kada se komponenta montira
     onMounted(() => {
       ucitajUsere();
     });
